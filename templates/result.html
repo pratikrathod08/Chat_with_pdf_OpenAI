@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question and Answer</title>
+    <link rel="stylesheet" href="styles_qa.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Ask a Question</h1>
+        <form action="{{url_for('chat')}}" method="post">
+            <label for="questionInput">Type your question:</label>
+            <input type="text" id="questionInput" name="questionInput" placeholder="Enter your question...">
+
+            <br><br>
+
+        <!--   <input type="Submit" value="Submit" onclick="submitQuestion()">  -->
+        <input type="Submit" value="Submit" onclick="">
+        </form>
+
+        <div id="answerOutput">
+            <!-- Output will be displayed here -->
+            {{final_result}}
+        </div>
+
+    </div>
+
+    <script>
+        function submitQuestion() {
+            var question = document.getElementById('questionInput').value;
+            var answerOutput = document.getElementById('answerOutput');
+            
+            // Perform processing or send the question to a backend for processing
+            // For demonstration purposes, let's just display the question as the answer
+            answerOutput.innerHTML = "<strong>Answer:</strong> " + question;
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload file</h1>
+        
+        <form action="{{url_for('home')}}" method="post" enctype="multipart/form-data">
+            <label for="fileInput">Choose one or more files:</label>
+            <input type="file" id="fileInput" name="fileInput" accept=".txt, .pdf, .docx" multiple>
+
+            <br><br>
+
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+</body>
+</html>

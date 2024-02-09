@@ -21,14 +21,13 @@ from langchain.retrievers import KNNRetriever
 
 
 load_dotenv()
-GOOGLE_API_KEY = "AIzaSyCH73oHS68DXEv7wo607mQQ9E2zdaSJ6bo"
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
 client = OpenAI()
 
 llm=OpenAI(max_tokens=1024)
 embeddings = embeddings.OpenAIEmbeddings()
 # embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001", google_api_key=GOOGLE_API_KEY)
-model = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=GOOGLE_API_KEY,temperature=0.3)
+model = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=os.getenv('GOOGLE_API_KEY'),temperature=0.3)
 persist_directory='db'
 
 

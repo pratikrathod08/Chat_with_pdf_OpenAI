@@ -4,14 +4,14 @@ import os
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import traceback
 import google.generativeai as genai
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+# from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain import embeddings
 from langchain.prompts import PromptTemplate
 import datetime
-# from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from dotenv import load_dotenv
 import warnings
 warnings.filterwarnings("ignore")
@@ -89,7 +89,7 @@ def chat():
         # KNN = KNNRetriever.from_texts(texts, embeddings)
         # docs = KNN.get_relevant_documents(question,n_results=4,max_tokens=1024)
 
-        print(docs)
+        # print(docs)
 
         s2 = datetime.datetime.now()
         prompt_template = """

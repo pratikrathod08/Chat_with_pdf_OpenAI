@@ -55,7 +55,7 @@ def home():
         context = "\n".join(str(p.page_content) for p in data)
         print("The total number of words in the context:", len(context))
 
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=200)
+        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1024, chunk_overlap=50)
         global texts    
         texts = text_splitter.split_text(context)
 
@@ -87,7 +87,7 @@ def chat():
         vectordb = Chroma(persist_directory=persist_directory,embedding_function=embeddings)
         print(vectordb)
         retriever = vectordb.as_retriever(search_type="mmr", search_kwargs={"k":1})
-        docs = retriever.get_relevant_documents(question)
+        docs = retriever.get_relevant_documents(question,max_tokens=1024)
 
         # KNN = KNNRetriever.from_texts(texts, embeddings)
         # docs = KNN.get_relevant_documents(question,n_results=4,max_tokens=1024)
@@ -96,14 +96,14 @@ def chat():
 
         s2 = datetime.datetime.now()
         prompt_template = """
-        Answer the question as detailed as possible from the provided context, make sure to provide all the details try your best to find details as powerfull ai system, if the answer is not in
+        Answer the question as detailed as possible from the provided context, if the answer is not in
         provided context just say, "answer is not available in the context", don't provide the wrong answer\n\n
         Context:\n {context}?\n
         Question: \n{question}\n
 
         Answer:
         """
-        prompt = PromptTemplate(template = prompt_template, input_variables = ["context", "question"])
+        prompt = PromptTemplate(template = prompt_template, input_variables = ["context", "question"],max_tokens=1024)
 
         # model = ChatGoogleGenerativeAI(model="gemini-pro",google_api_key=GOOGLE_API_KEY,temperature=1)
         chain = load_qa_chain(llm, chain_type="stuff", prompt=prompt)

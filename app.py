@@ -37,13 +37,16 @@ app = Flask(__name__)
 def home():
     if request.method == "POST":
         starttime = datetime.datetime.now()
-        pdf_docs = request.files['fileInput']
+
+        pdf_docs = request.files.getlist('fileInput')
         folder = 'pdfs'
         if not os.path.exists(folder):
             os.makedirs(folder)
-        filepath = os.path.join(folder,pdf_docs.filename)
-        pdf_docs.save(filepath)
 
+        for pdf_doc in pdf_docs:
+            filename = pdf_doc.filename
+            pdf_doc.save(os.path.join(folder , filename))
+        
         s2 = datetime.datetime.now()
         loader = PyPDFDirectoryLoader("pdfs")
         # data = loader.load_and_split()
